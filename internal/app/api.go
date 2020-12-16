@@ -3,6 +3,7 @@ package app
 import (
 	"fmt"
 	"os"
+	"translate_cli/util"
 
 	"github.com/urfave/cli"
 )
@@ -26,7 +27,8 @@ func Start() error {
 			UsageText: "Vowels to digits encryption",
 			Flags:     flags,
 			Action: func(c *cli.Context) error {
-				fmt.Printf("%s: \n source: %s\n result: %s\n", c.Command.UsageText, c.String("text"), "result text")
+				result := util.ShiftLettersToDigits(c.String("text"))
+				fmt.Printf("%s: \n source: %s\n result: %s\n", c.Command.UsageText, c.String("text"), result)
 				return nil
 			},
 		},
@@ -36,7 +38,8 @@ func Start() error {
 			UsageText: "Digits to vowels dencryption",
 			Flags:     flags,
 			Action: func(c *cli.Context) error {
-				fmt.Printf("%s: \n source: %s\n result: %s\n", c.Command.UsageText, c.String("text"), "result text")
+				result := util.ShiftDigitsToLetters(c.String("text"))
+				fmt.Printf("%s: \n source: %s\n result: %s\n", c.Command.UsageText, c.String("text"), result)
 				return nil
 			},
 		},
