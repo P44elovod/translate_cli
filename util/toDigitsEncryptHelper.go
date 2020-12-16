@@ -17,6 +17,7 @@ var lr = strings.NewReplacer(
 	"U", "5",
 )
 
+//ShiftLettersToDigits swap vowel letters to digits in words
 func ShiftLettersToDigits(source string) string {
 
 	return lr.Replace(source)

@@ -10,6 +10,7 @@ var dr = strings.NewReplacer(
 	"5", "u",
 )
 
+//ShiftDigitsToLetters swap digits to vowel letters in words
 func ShiftDigitsToLetters(source string) string {
 
 	return dr.Replace(source)

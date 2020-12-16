@@ -3,6 +3,7 @@ package app
 import (
 	"fmt"
 	"os"
+	"strings"
 	"translate_cli/util"
 
 	"github.com/urfave/cli"
@@ -12,44 +13,42 @@ func Start() error {
 
 	app := cli.NewApp()
 	app.Name = "Translation CLI"
-	app.Usage = "To Piglatina translation and vowels to digits(vice versa) shifting"
-	flags := []cli.Flag{
-		cli.StringFlag{
-			Name:  "text",
-			Usage: "source text",
-		},
-	}
+	app.Usage = "To Piglatin translation and vowels to digits(vice versa) shifting"
 
 	app.Commands = []cli.Command{
 		{
-			Name:      "vdencrypt",
+			Name:      "encrypt",
 			Usage:     "Encrypt vowels to digits",
 			UsageText: "Vowels to digits encryption",
-			Flags:     flags,
 			Action: func(c *cli.Context) error {
-				result := util.ShiftLettersToDigits(c.String("text"))
-				fmt.Printf("%s: \n source: %s\n result: %s\n", c.Command.UsageText, c.String("text"), result)
+				source := strings.Join(c.Args().Tail(), " ")
+				result := util.ShiftLettersToDigits(source)
+				fmt.Printf("%s: \n source: %s\n result: %s\n", c.Command.UsageText, source, result)
 				return nil
 			},
 		},
 		{
-			Name:      "dvdecrypt",
+			Name:      "decrypt",
 			Usage:     "Decrypt vowels to digits",
 			UsageText: "Digits to vowels dencryption",
-			Flags:     flags,
 			Action: func(c *cli.Context) error {
-				result := util.ShiftDigitsToLetters(c.String("text"))
-				fmt.Printf("%s: \n source: %s\n result: %s\n", c.Command.UsageText, c.String("text"), result)
+				source := strings.Join(c.Args().Tail(), " ")
+				result := util.ShiftDigitsToLetters(source)
+				fmt.Printf("%s: \n source: %s\n result: %s\n", c.Command.UsageText, source, result)
 				return nil
 			},
 		},
 		{
-			Name:      "piglatina",
-			Usage:     "Translate English to Piglatina",
+			Name:      "piglatin",
+			Usage:     "Translate English to Piglatin",
 			UsageText: "English to Piglatina translation",
-			Flags:     flags,
 			Action: func(c *cli.Context) error {
-				fmt.Printf("%s: \n source: %s\n result: %s\n", c.Command.UsageText, c.String("text"), "result text")
+				var source string
+				if c.NArg() > 0 {
+					source = strings.Join(c.Args().Tail(), " ")
+				}
+				result := util.TranslateTextToPiglatin(source)
+				fmt.Printf("%s: \n source: %s\n result: %s\n", c.Command.UsageText, source, result)
 				return nil
 			},
 		},
