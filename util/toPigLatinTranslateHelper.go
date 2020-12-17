@@ -22,6 +22,10 @@ func TranslateTextToPiglatin(sourceText string) string {
 func translateWordToPiglatin(sourceWord string) string {
 	firstVowelIndex := getFirstVowelIndex(sourceWord)
 
+	if firstVowelIndex == -1 {
+		return sourceWord + "(this word couldn't be translated)"
+	}
+
 	if firstVowelIndex != 0 && len(sourceWord) > 1 {
 		return sourceWord[firstVowelIndex:] + sourceWord[:firstVowelIndex] + "ay"
 	}
