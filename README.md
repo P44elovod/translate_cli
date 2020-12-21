@@ -2,6 +2,8 @@
 
 Translate CLI is created for translation to Pig Latin and vowels to digits(vice versa) shifting
 
+use ./cmd/main.go for running or building
+
 use next commands:
 - encrypt - for encryption vowel to digits
 - decrypt - for decryption digits to vowels
